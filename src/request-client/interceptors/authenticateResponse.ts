@@ -27,6 +27,7 @@ export function authenticateResponseInterceptor({
         await doReAuthenticate();
         throw error;
       }
+
       // 如果正在刷新 token，则将请求加入队列，等待刷新完成
       if (client.isRefreshing) {
         return new Promise((resolve) => {
