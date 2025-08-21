@@ -2,7 +2,7 @@
   "name": "@yunzhen/request",
   "packageManager": "pnpm@10.13.1",
   "version": "1.0.0",
-  "description": "",
+  "description": "基于 axios 封装的请求库",
   "sideEffects": false,
   "exports": {
     ".": {
@@ -18,6 +18,14 @@
   "files": [
     "dist"
   ],
+  "bugs": {
+    "url": "https://github.com/yunzhencc/request/issues"
+  },
+  "homepage": "https://github.com/yunzhencc/request/issues#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yunzhencc/request.git"
+  },
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",
