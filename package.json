@@ -1,0 +1,56 @@
+{
+  "name": "@yunzhen/request",
+  "version": "0.0.1",
+  "description": "",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib build --watch"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "es-toolkit": "^1.39.10",
+    "qs": "^6.14.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/types": "^19.8.1",
+    "@rslib/core": "^0.12.2",
+    "@types/node": "^24.3.0",
+    "@types/qs": "^6.14.0",
+    "axios-mock-adapter": "^2.1.0",
+    "eslint": "^9.33.0",
+    "lint-staged": "^16.1.5",
+    "simple-git-hooks": "^2.13.1",
+    "typescript": "~5.8.3",
+    "vitest": "^3.2.4"
+  },
+    "simple-git-hooks": {
+    "commit-msg": "npx --no -- commitlint --edit $1",
+    "pre-commit": "npx lint-staged",
+    "preserveUnused": [
+      "commit-msg"
+    ]
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
