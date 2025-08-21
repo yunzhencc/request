@@ -31,16 +31,19 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@commitlint/types": "^19.8.1",
     "@rslib/core": "^0.12.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "^24.3.0",
     "@types/qs": "^6.14.0",
     "axios-mock-adapter": "^2.1.0",
     "eslint": "^9.33.0",
     "lint-staged": "^16.1.5",
+    "semantic-release": "^24.2.7",
     "simple-git-hooks": "^2.13.1",
     "typescript": "~5.8.3",
     "vitest": "^3.2.4"
   },
-    "simple-git-hooks": {
+  "simple-git-hooks": {
     "commit-msg": "npx --no -- commitlint --edit $1",
     "pre-commit": "npx lint-staged",
     "preserveUnused": [
