@@ -1,7 +1,7 @@
 {
   "name": "@yunzhen/request",
   "packageManager": "pnpm@10.13.1",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "sideEffects": false,
   "exports": {
@@ -21,7 +21,7 @@
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",
-    "release": "semantic-release",
+    "release": "semantic-release --no-ci",
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
