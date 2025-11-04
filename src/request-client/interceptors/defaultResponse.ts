@@ -17,7 +17,7 @@ export function defaultResponseInterceptor({
     fulfilled: (response) => {
       const { config, data: responseData, status } = response;
 
-      if (config.responseReturn === 'raw') {
+      if (config.responseReturn === 'raw' || status === 204) {
         return response;
       }
 
