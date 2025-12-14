@@ -7,7 +7,7 @@ import type {
 } from './types';
 
 import axios from 'axios';
-import { merge } from 'es-toolkit/object';
+import { merge } from 'es-toolkit';
 import { getParamsSerializer } from './utils';
 
 const defaultRequestInterceptorConfig: RequestInterceptorConfig = {

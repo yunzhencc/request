@@ -1,5 +1,5 @@
 import type { RequestClientOptions } from './types';
-import { isString } from 'es-toolkit/compat';
+import { isString } from 'es-toolkit';
 import qs from 'qs';
 
 export function getParamsSerializer(

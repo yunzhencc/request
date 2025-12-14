@@ -1,5 +1,5 @@
 import type { ResponseInterceptorConfig } from '../types';
-import { isFunction } from 'es-toolkit/predicate';
+import { isFunction } from 'es-toolkit';
 
 export function defaultResponseInterceptor({
   codeField = 'code',
@@ -17,12 +17,12 @@ export function defaultResponseInterceptor({
     fulfilled: (response) => {
       const { config, data: responseData, status } = response;
 
-      if (config.responseReturn === 'raw' || status === 204) {
+      if (config.responseReturn === 'raw') {
         return response;
       }
 
       if (status >= 200 && status < 400) {
-        if (config.responseReturn === 'body') {
+        if (config.responseReturn === 'body' || !responseData) {
           return responseData;
         }
         else if (
