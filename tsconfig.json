@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "rootDir": "./src",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
