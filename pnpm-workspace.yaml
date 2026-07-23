@@ -1,0 +1,8 @@
+shellEmulator: true
+
+trustPolicy: no-downgrade
+
+allowBuilds:
+  core-js: false
+  esbuild: false
+  simple-git-hooks: true
