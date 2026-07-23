@@ -40,28 +40,28 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
-    "axios": "^1.18.1",
-    "es-toolkit": "^1.49.0",
-    "qs": "^6.15.3"
+    "axios": "catalog:core",
+    "es-toolkit": "catalog:core",
+    "qs": "catalog:core"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^9.2.0",
-    "@commitlint/cli": "^21.2.1",
-    "@commitlint/config-conventional": "^21.2.0",
-    "@commitlint/types": "^21.2.0",
-    "@semantic-release/changelog": "^7.0.0",
-    "@semantic-release/git": "^11.0.0",
-    "@types/node": "^26.1.1",
-    "@types/qs": "^6.15.1",
-    "axios-mock-adapter": "^2.1.0",
-    "eslint": "^10.7.0",
-    "lint-staged": "^17.1.1",
-    "publint": "^0.3.21",
-    "semantic-release": "^25.0.8",
-    "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.22.13",
-    "typescript": "~6.0.3",
-    "vitest": "^4.1.10"
+    "@antfu/eslint-config": "catalog:cli",
+    "@commitlint/cli": "catalog:cli",
+    "@commitlint/config-conventional": "catalog:cli",
+    "@commitlint/types": "catalog:cli",
+    "@semantic-release/changelog": "catalog:cli",
+    "@semantic-release/git": "catalog:cli",
+    "@types/node": "catalog:types",
+    "@types/qs": "catalog:types",
+    "axios-mock-adapter": "catalog:test",
+    "eslint": "catalog:cli",
+    "lint-staged": "catalog:cli",
+    "publint": "catalog:cli",
+    "semantic-release": "catalog:cli",
+    "simple-git-hooks": "catalog:cli",
+    "tsdown": "catalog:cli",
+    "typescript": "catalog:cli",
+    "vitest": "catalog:test"
   },
   "simple-git-hooks": {
     "commit-msg": "npx --no -- commitlint --edit $1",
