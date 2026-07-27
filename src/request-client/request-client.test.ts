@@ -2,6 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
+import { defaultResponseInterceptor } from './interceptors';
 import { RequestClient } from './request-client';
 
 describe('requestClient', () => {
@@ -80,5 +81,101 @@ describe('requestClient', () => {
       code: 'ECONNABORTED',
       isAxiosError: true,
     });
+  });
+
+  it('should return raw response when responseReturn is raw', async () => {
+    requestClient.addResponseInterceptor(defaultResponseInterceptor({
+      codeField: 'code',
+      dataField: 'data',
+      successCode: 0,
+    }));
+    mock.onGet('/test/raw').reply(200, { code: 0, data: 'raw response' });
+
+    const response = await requestClient.get('/test/raw', {
+      responseReturn: 'raw',
+    });
+
+    expect(response.data).toEqual({ code: 0, data: 'raw response' });
+  });
+
+  it('should return response body when responseReturn is body', async () => {
+    requestClient.addResponseInterceptor(defaultResponseInterceptor({
+      codeField: 'code',
+      dataField: 'data',
+      successCode: 0,
+    }));
+    const mockData = { code: 0, data: 'body response' };
+    mock.onGet('/test/body').reply(200, mockData);
+
+    const response = await requestClient.get('/test/body', {
+      responseReturn: 'body',
+    });
+
+    expect(response).toEqual(mockData);
+  });
+
+  it('should return data field when responseReturn is data', async () => {
+    requestClient.addResponseInterceptor(defaultResponseInterceptor({
+      codeField: 'code',
+      dataField: 'data',
+      successCode: 0,
+    }));
+    mock.onGet('/test/data').reply(200, { code: 0, data: 'data response' });
+
+    const response = await requestClient.get('/test/data', {
+      responseReturn: 'data',
+    });
+
+    expect(response).toBe('data response');
+  });
+
+  it('should support custom success and data fields', async () => {
+    requestClient.addResponseInterceptor(defaultResponseInterceptor({
+      codeField: 'statusCode',
+      dataField: 'result',
+      successCode: 'ok',
+    }));
+    mock.onGet('/test/custom-fields').reply(200, {
+      result: 'custom response',
+      statusCode: 'ok',
+    });
+
+    const response = await requestClient.get('/test/custom-fields', {
+      responseReturn: 'data',
+    });
+
+    expect(response).toBe('custom response');
+  });
+
+  it('should support function successCode and dataField', async () => {
+    requestClient.addResponseInterceptor(defaultResponseInterceptor({
+      codeField: 'code',
+      dataField: response => response.payload.value,
+      successCode: response => response.ok === true,
+    }));
+    mock.onGet('/test/custom-functions').reply(200, {
+      ok: true,
+      payload: { value: 'function response' },
+    });
+
+    const response = await requestClient.get('/test/custom-functions', {
+      responseReturn: 'data',
+    });
+
+    expect(response).toBe('function response');
+  });
+
+  it('should reject response body when success code does not match', async () => {
+    requestClient.addResponseInterceptor(defaultResponseInterceptor({
+      codeField: 'code',
+      dataField: 'data',
+      successCode: 0,
+    }));
+    const mockData = { code: 500, data: null, message: 'failed' };
+    mock.onGet('/test/business-error').reply(200, mockData);
+
+    await expect(requestClient.get('/test/business-error', {
+      responseReturn: 'data',
+    })).rejects.toEqual(mockData);
   });
 });
