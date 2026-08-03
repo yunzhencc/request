@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsdown';
+import { StaleGuardRecorder } from 'tsdown-stale-guard';
 
 export default defineConfig({
   entry: [
@@ -7,5 +8,9 @@ export default defineConfig({
   dts: true,
   format: ['esm', 'cjs'],
   unbundle: true,
+  exports: true,
   publint: true,
+  plugins: [
+    StaleGuardRecorder(),
+  ],
 });

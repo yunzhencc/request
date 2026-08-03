@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "lib": ["DOM", "ES2021"],
-    "useDefineForClassFields": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
     "rootDir": "./src",
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "strict": true,
+    "strictNullChecks": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
   "include": ["src"],

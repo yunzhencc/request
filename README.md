@@ -18,7 +18,7 @@ pnpm i @yunzhen/request
 ## 🔨 使用
 
 ```tsx
-import { RequestClient, defaultResponseInterceptor } from '@yunzhen/request';
+import { defaultResponseInterceptor, RequestClient } from '@yunzhen/request';
 
 const request = new RequestClient();
 
