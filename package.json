@@ -40,7 +40,7 @@
     "dev": "Rebuild on change during development",
     "lint": "Check for code style issues",
     "prepack": "Build before publishing",
-    "release": "bumpp",
+    "release": "Bump version and publish a release",
     "test": "Run the test suite",
     "typecheck": "Check types",
     "prepare": "Set up git hooks and skills"
