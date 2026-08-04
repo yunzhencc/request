@@ -45,5 +45,5 @@ request.addResponseInterceptor(
 [npm-downloads-href]: https://npmx.dev/package/@yunzhen/request
 [bundle-src]: https://img.shields.io/bundlephobia/minzip/@yunzhen/request?style=flat&colorA=080f12&colorB=1fa669&label=minzip
 [bundle-href]: https://bundlephobia.com/result?p=@yunzhen/request
-[license-src]: https://img.shields.io/github/license/yunzhen/request.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-src]: https://img.shields.io/github/license/yunzhencc/request.svg?style=flat&colorA=080f12&colorB=1fa669
 [license-href]: https://github.com/yunzhencc/request/blob/main/LICENSE
