@@ -4,20 +4,17 @@
   "version": "1.1.0",
   "packageManager": "pnpm@11.20.0",
   "description": "基于 axios 封装的请求库",
-  "author": "yunzhencc",
+  "author": "YunZhen",
   "license": "MIT",
-  "homepage": "https://github.com/yunzhencc/request/issues#readme",
+  "homepage": "https://github.com/yunzhencc/request#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yunzhencc/request.git"
   },
-  "bugs": {
-    "url": "https://github.com/yunzhencc/request/issues"
-  },
+  "bugs": "https://github.com/yunzhencc/request/issues",
   "keywords": [
     "axios",
-    "request",
-    "typescript"
+    "request"
   ],
   "sideEffects": false,
   "exports": {
@@ -33,9 +30,9 @@
     "dev": "tsdown --watch",
     "lint": "eslint",
     "prepack": "nr build",
+    "release": "bumpp",
     "test": "pnpm run build && vitest",
     "typecheck": "tsc",
-    "release": "bumpp",
     "prepare": "git config core.hooksPath .githooks && simple-git-hooks && skills-npm"
   },
   "scripts-info": {

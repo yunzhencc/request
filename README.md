@@ -2,6 +2,11 @@
   @yunzhen/request
 </h1>
 
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![bundle][bundle-src]][bundle-href]
+[![License][license-src]][license-href]
+
 ## 🏗 安装
 
 ```bash
@@ -31,3 +36,14 @@ request.addResponseInterceptor(
   }),
 );
 ```
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/@yunzhen/request?style=flat&colorA=080f12&colorB=1fa669
+[npm-version-href]: https://npmx.dev/package/@yunzhen/request
+[npm-downloads-src]: https://img.shields.io/npm/dm/@yunzhen/request?style=flat&colorA=080f12&colorB=1fa669
+[npm-downloads-href]: https://npmx.dev/package/@yunzhen/request
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/@yunzhen/request?style=flat&colorA=080f12&colorB=1fa669&label=minzip
+[bundle-href]: https://bundlephobia.com/result?p=@yunzhen/request
+[license-src]: https://img.shields.io/github/license/yunzhen/request.svg?style=flat&colorA=080f12&colorB=1fa669
+[license-href]: https://github.com/yunzhencc/request/blob/main/LICENSE

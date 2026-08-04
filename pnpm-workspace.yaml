@@ -1,9 +1,7 @@
 catalogMode: prefer
 ignoreWorkspaceRootCheck: true
 minimumReleaseAgeExclude:
-  - '@types/node@25.9.0'
-  - tsx@4.22.2
-  - bumpp@12.0.0
+
 shellEmulator: true
 trustPolicy: no-downgrade
 
