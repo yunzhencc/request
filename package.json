@@ -21,15 +21,10 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    },
+    ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
@@ -37,12 +32,21 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint",
-    "prepack": "pnpm build",
-    "test": "pnpm build && vitest",
+    "prepack": "nr build",
+    "test": "pnpm run build && vitest",
     "typecheck": "tsc",
     "release": "bumpp",
-    "prepare": "simple-git-hooks",
-    "preinstall": "npx only-allow pnpm"
+    "prepare": "git config core.hooksPath .githooks && simple-git-hooks && skills-npm"
+  },
+  "scripts-info": {
+    "build": "Build the library for publishing",
+    "dev": "Rebuild on change during development",
+    "lint": "Check for code style issues",
+    "prepack": "Build before publishing",
+    "release": "Bump version and publish a release",
+    "test": "Run the test suite",
+    "typecheck": "Check types",
+    "prepare": "Set up git hooks and skills"
   },
   "dependencies": {
     "axios": "catalog:core",
@@ -51,31 +55,35 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:cli",
+    "@antfu/ni": "catalog:cli",
     "@commitlint/cli": "catalog:cli",
     "@commitlint/config-conventional": "catalog:cli",
     "@commitlint/types": "catalog:cli",
     "@types/node": "catalog:types",
     "@types/qs": "catalog:types",
-    "axios-mock-adapter": "catalog:test",
+    "axios-mock-adapter": "catalog:testing",
     "bumpp": "catalog:cli",
     "eslint": "catalog:cli",
-    "lint-staged": "catalog:cli",
+    "nano-staged": "catalog:cli",
     "publint": "catalog:cli",
     "simple-git-hooks": "catalog:cli",
+    "skills-npm": "catalog:cli",
     "tsdown": "catalog:cli",
-    "tsdown-stale-guard": "catalog:test",
+    "tsdown-stale-guard": "catalog:testing",
+    "tsnapi": "catalog:testing",
     "tsx": "catalog:cli",
     "typescript": "catalog:cli",
-    "vitest": "catalog:test"
+    "vite": "catalog:cli",
+    "vitest": "catalog:testing"
   },
   "simple-git-hooks": {
     "commit-msg": "npx --no -- commitlint --edit $1",
-    "pre-commit": "npx lint-staged",
+    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && pnpm run build && npx nano-staged",
     "preserveUnused": [
       "commit-msg"
     ]
   },
-  "lint-staged": {
+  "nano-staged": {
     "*": "eslint --fix"
   },
   "publishConfig": {

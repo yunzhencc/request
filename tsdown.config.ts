@@ -6,7 +6,6 @@ export default defineConfig({
     'src/index.ts',
   ],
   dts: true,
-  format: ['esm', 'cjs'],
   unbundle: true,
   exports: true,
   publint: true,

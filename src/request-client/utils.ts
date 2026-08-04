@@ -4,7 +4,7 @@ import qs from 'qs';
 
 export function getParamsSerializer(
   paramsSerializer: RequestClientOptions['paramsSerializer'],
-) {
+): RequestClientOptions['paramsSerializer'] {
   if (isString(paramsSerializer)) {
     switch (paramsSerializer) {
       case 'brackets': {

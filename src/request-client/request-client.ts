@@ -49,14 +49,14 @@ export class RequestClient {
   addRequestInterceptor({
     fulfilled,
     rejected,
-  }: RequestInterceptorConfig = defaultRequestInterceptorConfig) {
+  }: RequestInterceptorConfig = defaultRequestInterceptorConfig): void {
     this.instance.interceptors.request.use(fulfilled, rejected);
   }
 
   addResponseInterceptor<T = any>({
     fulfilled,
     rejected,
-  }: ResponseInterceptorConfig<T> = defaultResponseInterceptorConfig) {
+  }: ResponseInterceptorConfig<T> = defaultResponseInterceptorConfig): void {
     this.instance.interceptors.response.use(fulfilled, rejected);
   }
 
