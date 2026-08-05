@@ -12,6 +12,7 @@ export { defaultResponseInterceptor }
 export { ExtendOptions }
 export { HttpResponse }
 export { MakeErrorMessageFn }
+export { RefreshTokenQueueItem }
 export { RequestClient }
 export { RequestClientConfig }
 export { RequestClientOptions }
