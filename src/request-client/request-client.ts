@@ -1,4 +1,8 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
+import type {
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import type {
   RequestClientConfig,
   RequestClientOptions,
@@ -20,11 +24,20 @@ const defaultResponseInterceptorConfig: ResponseInterceptorConfig = {
   rejected: error => Promise.reject(error),
 };
 
+export interface RefreshTokenQueueItem {
+  /** 排队请求的重放结果 */
+  resolve: (value: unknown) => void;
+  /** 刷新失败时用于拒绝该请求 */
+  reject: (reason?: unknown) => void;
+  /** 发起重放所需的原始请求配置；__isRetryRequest 用于标记重试请求，避免重复刷新 */
+  config: InternalAxiosRequestConfig & { __isRetryRequest?: boolean };
+}
+
 export class RequestClient {
   // 是否正在刷新token
   public isRefreshing = false;
   // 刷新token队列
-  public refreshTokenQueue: ((token: string) => void)[] = [];
+  public refreshTokenQueue: RefreshTokenQueueItem[] = [];
   private readonly instance: AxiosInstance;
 
   constructor(options: RequestClientOptions = {}) {
