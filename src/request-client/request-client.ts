@@ -1,4 +1,8 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
+import type {
+  AxiosInstance,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import type {
   RequestClientConfig,
   RequestClientOptions,
@@ -24,11 +28,17 @@ type DownloadRequestConfig = {
   responseReturn?: 'body' | 'raw';
 } & Omit<RequestClientConfig, 'responseReturn'>;
 
+interface RefreshTokenQueueItem {
+  config: InternalAxiosRequestConfig & { __isRetryRequest?: boolean };
+  reject: (reason?: unknown) => void;
+  resolve: (value: unknown) => void;
+}
+
 export class RequestClient {
   // 是否正在刷新token
   public isRefreshing = false;
   // 刷新token队列
-  public refreshTokenQueue: ((token: string) => void)[] = [];
+  public refreshTokenQueue: RefreshTokenQueueItem[] = [];
   public readonly instance: AxiosInstance;
 
   constructor(options: RequestClientOptions = {}) {
