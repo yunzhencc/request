@@ -220,6 +220,19 @@ describe('requestClient', () => {
     expect(response).toBe('data response');
   });
 
+  it('should reject an empty response body in data mode', async () => {
+    requestClient.addResponseInterceptor(defaultResponseInterceptor({
+      codeField: 'code',
+      dataField: 'data',
+      successCode: 0,
+    }));
+    mock.onGet('/test/empty-data').reply(200);
+
+    await expect(requestClient.get('/test/empty-data', {
+      responseReturn: 'data',
+    })).rejects.toBeDefined();
+  });
+
   it('should support custom success and data fields', async () => {
     requestClient.addResponseInterceptor(defaultResponseInterceptor({
       codeField: 'statusCode',

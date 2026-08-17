@@ -22,7 +22,7 @@ export function defaultResponseInterceptor({
       }
 
       if (status >= 200 && status < 400) {
-        if (config.responseReturn === 'body' || !responseData) {
+        if (config.responseReturn === 'body') {
           return responseData;
         }
         else if (
