@@ -65,6 +65,65 @@ describe('requestClient', () => {
     expect(response.data).toEqual(mockData);
   });
 
+  it('should upload fields and a file as FormData', async () => {
+    const file = new Blob(['file contents'], { type: 'text/plain' });
+    mock.onPost('/test/upload').reply((config) => {
+      const formData = config.data;
+      const uploadedFile = formData instanceof FormData
+        ? formData.get('file')
+        : undefined;
+      return formData instanceof FormData
+        && uploadedFile instanceof Blob
+        && uploadedFile.size === file.size
+        && uploadedFile.type === file.type
+        && formData.get('name') === 'report'
+        ? [200, { data: 'file uploaded' }]
+        : [400, { message: 'invalid form data' }];
+    });
+
+    const response = await requestClient.upload('/test/upload', {
+      file,
+      name: 'report',
+    });
+
+    expect(response.data).toEqual({ data: 'file uploaded' });
+  });
+
+  it('should index array upload fields and omit undefined values', async () => {
+    const file = new Blob(['file contents'], { type: 'text/plain' });
+    mock.onPost('/test/upload-array').reply((config) => {
+      const formData = config.data as FormData;
+      return formData instanceof FormData
+        && formData.get('tags[0]') === 'first'
+        && !formData.has('tags[1]')
+        && formData.get('tags[2]') === 'third'
+        && !formData.has('description')
+        ? [200, { data: 'array uploaded' }]
+        : [400, { message: 'invalid form data' }];
+    });
+
+    const response = await requestClient.upload('/test/upload-array', {
+      file,
+      tags: ['first', undefined, 'third'],
+      description: undefined,
+    });
+
+    expect(response.data).toEqual({ data: 'array uploaded' });
+  });
+
+  it('should download a response as a Blob', async () => {
+    const file = new Blob(['file contents'], { type: 'text/plain' });
+    mock.onGet('/test/download').reply(config =>
+      config.responseType === 'blob'
+        ? [200, file]
+        : [400, { message: 'expected blob response' }],
+    );
+
+    const response = await requestClient.download<any>('/test/download');
+
+    expect(response.data).toBe(file);
+  });
+
   it('should successfully make a DELETE request', async () => {
     const mockData = { data: 'delete response' };
     mock.onDelete('/test/delete').reply(200, mockData);

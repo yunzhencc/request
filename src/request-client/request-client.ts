@@ -20,6 +20,10 @@ const defaultResponseInterceptorConfig: ResponseInterceptorConfig = {
   rejected: error => Promise.reject(error),
 };
 
+type DownloadRequestConfig = {
+  responseReturn?: 'body' | 'raw';
+} & Omit<RequestClientConfig, 'responseReturn'>;
+
 export class RequestClient {
   // 是否正在刷新token
   public isRefreshing = false;
@@ -92,6 +96,18 @@ export class RequestClient {
     return this.request<T>(url, { ...config, data, method: 'POST' });
   }
 
+  public download<T = Blob>(
+    url: string,
+    config?: DownloadRequestConfig,
+  ): Promise<T> {
+    return this.request<T>(url, {
+      responseReturn: 'body',
+      method: 'GET',
+      ...config,
+      responseType: 'blob',
+    });
+  }
+
   /**
    * PUT请求方法
    */
@@ -101,6 +117,34 @@ export class RequestClient {
     config?: RequestClientConfig,
   ): Promise<T> {
     return this.request<T>(url, { ...config, data, method: 'PUT' });
+  }
+
+  public upload<T = any>(
+    url: string,
+    data: Record<string, any> & { file: Blob | File },
+    config?: RequestClientConfig,
+  ): Promise<T> {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(data)) {
+      if (Array.isArray(value)) {
+        value.forEach((item, index) => {
+          if (item !== undefined) {
+            formData.append(`${key}[${index}]`, item);
+          }
+        });
+      }
+      else if (value !== undefined) {
+        formData.append(key, value);
+      }
+    }
+
+    return this.post<T>(url, formData, {
+      ...config,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        ...config?.headers,
+      },
+    });
   }
 
   /**
