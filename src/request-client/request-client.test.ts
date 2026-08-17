@@ -18,6 +18,15 @@ describe('requestClient', () => {
     mock.reset();
   });
 
+  it('should expose the configured Axios instance and base URL', () => {
+    const client = new RequestClient({
+      baseURL: 'https://api.example.com/v1',
+    });
+
+    expect(client.instance.defaults.baseURL).toBe('https://api.example.com/v1');
+    expect(client.getBaseUrl()).toBe('https://api.example.com/v1');
+  });
+
   it('should successfully make a GET request', async () => {
     mock.onGet('test/url').reply(200, { data: 'response' });
 

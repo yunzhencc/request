@@ -25,7 +25,7 @@ export class RequestClient {
   public isRefreshing = false;
   // 刷新token队列
   public refreshTokenQueue: ((token: string) => void)[] = [];
-  private readonly instance: AxiosInstance;
+  public readonly instance: AxiosInstance;
 
   constructor(options: RequestClientOptions = {}) {
     // 合并默认配置和传入的配置
@@ -65,6 +65,10 @@ export class RequestClient {
    */
   public get<T = any>(url: string, config?: RequestClientConfig): Promise<T> {
     return this.request<T>(url, { ...config, method: 'GET' });
+  }
+
+  public getBaseUrl(): string | undefined {
+    return this.instance.defaults.baseURL;
   }
 
   /**
