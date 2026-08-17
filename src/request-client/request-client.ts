@@ -8,7 +8,7 @@ import type {
 
 import axios from 'axios';
 import { merge } from 'es-toolkit';
-import { getParamsSerializer } from './utils';
+import { bindMethods, getParamsSerializer } from './utils';
 
 const defaultRequestInterceptorConfig: RequestInterceptorConfig = {
   fulfilled: response => response,
@@ -48,6 +48,7 @@ export class RequestClient {
       requestConfig.paramsSerializer,
     );
     this.instance = axios.create(requestConfig);
+    bindMethods(this);
   }
 
   addRequestInterceptor({

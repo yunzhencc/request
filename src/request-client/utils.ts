@@ -2,6 +2,25 @@ import type { RequestClientOptions } from './types';
 import { isString } from 'es-toolkit';
 import qs from 'qs';
 
+export function bindMethods(instance: object): void {
+  const prototype = Object.getPrototypeOf(instance);
+
+  for (const key of Object.getOwnPropertyNames(prototype)) {
+    if (key === 'constructor') {
+      continue;
+    }
+
+    const method = Reflect.get(instance, key);
+    if (typeof method === 'function') {
+      Object.defineProperty(instance, key, {
+        configurable: true,
+        value: method.bind(instance),
+        writable: true,
+      });
+    }
+  }
+}
+
 export function getParamsSerializer(
   paramsSerializer: RequestClientOptions['paramsSerializer'],
 ): RequestClientOptions['paramsSerializer'] {

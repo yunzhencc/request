@@ -1,3 +1,4 @@
+import type { AxiosResponse } from 'axios';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -25,6 +26,28 @@ describe('requestClient', () => {
 
     expect(client.instance.defaults.baseURL).toBe('https://api.example.com/v1');
     expect(client.getBaseUrl()).toBe('https://api.example.com/v1');
+  });
+
+  it('should retain client context for extracted public methods', async () => {
+    const client = new RequestClient({
+      baseURL: 'https://api.example.com/v1',
+    });
+    const get = client.get<AxiosResponse>;
+    const request = client.request<AxiosResponse>;
+    const getBaseUrl = client.getBaseUrl;
+
+    mock.onGet('/test/extracted-get').reply(200, { data: 'get response' });
+    mock.onGet('/test/extracted-request').reply(200, {
+      data: 'request response',
+    });
+
+    expect(getBaseUrl()).toBe('https://api.example.com/v1');
+    expect((await get('/test/extracted-get')).data).toEqual({
+      data: 'get response',
+    });
+    expect(
+      (await request('/test/extracted-request', { method: 'GET' })).data,
+    ).toEqual({ data: 'request response' });
   });
 
   it('should successfully make a GET request', async () => {
