@@ -71,11 +71,25 @@ interface HttpResponse<T = any> {
 
 type MakeErrorMessageFn = (message: string, error: any) => void;
 
+type RequestErrorCode
+  = | 'network'
+    | 'timeout'
+    | 'badRequest'
+    | 'unauthorized'
+    | 'forbidden'
+    | 'notFound'
+    | 'serverError';
+
+type RequestErrorHandler
+  = (code: RequestErrorCode, error: unknown) => void;
+
 export type {
   HttpResponse,
   MakeErrorMessageFn,
   RequestClientConfig,
   RequestContentType,
+  RequestErrorCode,
+  RequestErrorHandler,
   RequestInterceptorConfig,
   RequestResponse,
   ResponseInterceptorConfig,

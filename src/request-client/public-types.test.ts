@@ -1,5 +1,10 @@
 import type { AxiosResponse } from 'axios';
-import type { RequestContentType, RequestResponse } from '../index';
+import type {
+  RequestContentType,
+  RequestErrorCode,
+  RequestErrorHandler,
+  RequestResponse,
+} from '../index';
 import { expectTypeOf, it } from 'vitest';
 
 it('exports request response and content type contracts', () => {
@@ -12,4 +17,17 @@ it('exports request response and content type contracts', () => {
     | 'application/x-www-form-urlencoded;charset=utf-8'
     | 'multipart/form-data;charset=utf-8'
   >();
+  expectTypeOf<RequestErrorCode>().toEqualTypeOf<
+    | 'network'
+    | 'timeout'
+    | 'badRequest'
+    | 'unauthorized'
+    | 'forbidden'
+    | 'notFound'
+    | 'serverError'
+  >();
+  expectTypeOf<RequestErrorHandler>().parameters.toEqualTypeOf<[
+    RequestErrorCode,
+    unknown,
+  ]>();
 });

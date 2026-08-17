@@ -9,6 +9,7 @@ export * from "axios";
 export { authenticateResponseInterceptor }
 export { axios }
 export { defaultResponseInterceptor }
+export { errorMessageResponseInterceptor }
 export { ExtendOptions }
 export { HttpResponse }
 export { MakeErrorMessageFn }
@@ -16,6 +17,8 @@ export { RequestClient }
 export { RequestClientConfig }
 export { RequestClientOptions }
 export { RequestContentType }
+export { RequestErrorCode }
+export { RequestErrorHandler }
 export { RequestInterceptorConfig }
 export { RequestResponse }
 export { ResponseInterceptorConfig }

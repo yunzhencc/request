@@ -9,5 +9,6 @@ export * from "axios";
 export { authenticateResponseInterceptor }
 export { axios }
 export { defaultResponseInterceptor }
+export { errorMessageResponseInterceptor }
 export { RequestClient }
 // #endregion

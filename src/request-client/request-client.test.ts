@@ -219,10 +219,10 @@ describe('requestClient', () => {
     requestClient.addResponseInterceptor(defaultResponseInterceptor({
       codeField: 'code',
       dataField: response => response.payload.value,
-      successCode: response => response.ok === true,
+      successCode: code => code === 'ok',
     }));
     mock.onGet('/test/custom-functions').reply(200, {
-      ok: true,
+      code: 'ok',
       payload: { value: 'function response' },
     });
 
