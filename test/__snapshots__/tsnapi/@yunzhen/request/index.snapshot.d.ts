@@ -15,6 +15,8 @@ export { MakeErrorMessageFn }
 export { RequestClient }
 export { RequestClientConfig }
 export { RequestClientOptions }
+export { RequestContentType }
 export { RequestInterceptorConfig }
+export { RequestResponse }
 export { ResponseInterceptorConfig }
 // #endregion

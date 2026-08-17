@@ -27,6 +27,12 @@ type RequestResponse<T = any> = AxiosResponse<T> & {
   config: RequestClientConfig<T>;
 };
 
+type RequestContentType
+  = | 'application/json;charset=utf-8'
+    | 'application/octet-stream;charset=utf-8'
+    | 'application/x-www-form-urlencoded;charset=utf-8'
+    | 'multipart/form-data;charset=utf-8';
+
 export interface ExtendOptions<T = any> {
   /**
    * 参数序列化方式。预置的有
@@ -69,6 +75,8 @@ export type {
   HttpResponse,
   MakeErrorMessageFn,
   RequestClientConfig,
+  RequestContentType,
   RequestInterceptorConfig,
+  RequestResponse,
   ResponseInterceptorConfig,
 };
